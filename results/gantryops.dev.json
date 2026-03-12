@@ -1,0 +1,26 @@
+{
+  "domain": "gantryops.dev",
+  "checks": {
+    "spf": {
+      "status": "pass",
+      "message": "Valid SPF record",
+      "record": "v=spf1 include:_spf.mx.cloudflare.net ~all"
+    },
+    "dmarc": {
+      "status": "fail",
+      "message": "A DMARC record does not exist."
+    },
+    "dnssec": {
+      "status": "warn",
+      "message": "DNSSEC not enabled"
+    },
+    "nameservers": {
+      "status": "pass",
+      "message": "Nameservers: olga.ns.cloudflare.com, norm.ns.cloudflare.com"
+    },
+    "mx": {
+      "status": "pass",
+      "message": "MX records: route2.mx.cloudflare.net, route1.mx.cloudflare.net, route3.mx.cloudflare.net"
+    }
+  }
+}

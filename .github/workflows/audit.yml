@@ -1,0 +1,52 @@
+# ==============================================================================
+# DNS Security Audit — Daily Scheduled Workflow
+# ==============================================================================
+# Runs checkdmarc against every domain in domains.yml, diffs against
+# the previous run, and opens/closes GitHub Issues for any changes or
+# problems found.
+#
+# Fork this repo, update domains.yml, and the workflow runs automatically.
+
+name: DNS Audit
+
+on:
+  schedule:
+    # Every day at 07:00 UTC
+    - cron: "0 7 * * *"
+  workflow_dispatch: # Manual trigger for testing
+  push:
+    paths:
+      - "domains.yml"
+
+permissions:
+  issues: write
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Run audit
+        run: uv run scripts/audit.py
+
+      - name: Commit updated results (only if changed)
+        run: |
+          git config user.name "dns-auditer[bot]"
+          git config user.email "dns-auditer[bot]@users.noreply.github.com"
+          git add results/
+          if ! git diff --staged --quiet; then
+            git commit -m "audit: $(date -u +%Y-%m-%d) results"
+            git push
+          fi
+
+      - name: Manage issues
+        run: uv run scripts/manage_issues.py
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}

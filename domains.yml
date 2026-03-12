@@ -1,0 +1,7 @@
+# ==============================================================================
+# Domain Configuration
+# ==============================================================================
+# Add your domains here. The workflow will check each one daily.
+
+domains:
+  - gantryops.dev
