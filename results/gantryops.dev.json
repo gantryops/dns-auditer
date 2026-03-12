@@ -14,13 +14,51 @@
       "status": "warn",
       "message": "DNSSEC not enabled"
     },
-    "nameservers": {
-      "status": "pass",
-      "message": "Nameservers: olga.ns.cloudflare.com, norm.ns.cloudflare.com"
-    },
     "mx": {
       "status": "pass",
       "message": "MX records: route2.mx.cloudflare.net, route1.mx.cloudflare.net, route3.mx.cloudflare.net"
+    },
+    "tls_cert": {
+      "status": "pass",
+      "message": "Certificate valid for 83 days (expires 2026-06-04)",
+      "days_left": 83,
+      "issuer": "Google Trust Services"
+    },
+    "caa": {
+      "status": "warn",
+      "message": "No CAA records \u2014 any CA can issue certificates for this domain"
+    },
+    "https_redirect": {
+      "status": "pass",
+      "message": "HTTP redirects to HTTPS (301 \u2192 https://gantryops.dev/)"
+    },
+    "hsts": {
+      "status": "warn",
+      "message": "No HSTS header"
+    },
+    "csp": {
+      "status": "warn",
+      "message": "No Content-Security-Policy header"
+    },
+    "x_frame_options": {
+      "status": "warn",
+      "message": "No X-Frame-Options header (CSP frame-ancestors is the modern replacement)"
+    },
+    "x_content_type_options": {
+      "status": "pass",
+      "message": "X-Content-Type-Options: nosniff"
+    },
+    "permissions_policy": {
+      "status": "warn",
+      "message": "No Permissions-Policy header"
+    },
+    "ns_health": {
+      "status": "pass",
+      "message": "All 2 nameservers responding"
+    },
+    "soa_consistency": {
+      "status": "pass",
+      "message": "SOA serial consistent: 2398305723"
     }
   }
 }
