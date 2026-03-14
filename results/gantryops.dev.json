@@ -20,8 +20,8 @@
     },
     "tls_cert": {
       "status": "pass",
-      "message": "Certificate valid for 83 days (expires 2026-06-04)",
-      "days_left": 83,
+      "message": "Certificate valid for 82 days (expires 2026-06-04)",
+      "days_left": 82,
       "issuer": "Google Trust Services"
     },
     "caa": {
