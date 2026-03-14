@@ -48,6 +48,10 @@ domains:
 | Check | What it verifies | Severity |
 |-------|-----------------|----------|
 | **TLS Certificate** | Valid cert, not expiring within 30 days | fail (<7d) / warn (<30d) |
+| **TLS Protocol** | Not using deprecated SSLv3, TLS 1.0, or TLS 1.1 | fail |
+| **TLS Cipher** | No weak cipher suites (RC4, 3DES, export, null) | warn |
+| **Certificate Coverage** | Certificate SANs cover the domain and www | fail/warn |
+| **Certificate Transparency** | Certificate appears in public CT logs (via crt.sh) | fail/warn |
 | **CAA** | CAA records restrict which CAs can issue certs | warn |
 
 ### Web Security
@@ -69,6 +73,30 @@ domains:
 | **SOA Consistency** | SOA serial matches across all nameservers | warn |
 | **Dangling CNAME** | www CNAME target resolves (subdomain takeover risk) | fail |
 
+## Per-domain configuration
+
+You can customise which checks run (and at what severity) per domain using the extended `domains.yml` format:
+
+```yaml
+domains:
+  - simple-domain.com              # all checks, default severities
+
+  - legacy-site.com:               # extended format
+      skip_checks: [dnssec, permissions_policy]
+      severity_overrides:
+        caa: pass                  # accepted risk, don't alert
+        hsts: warn                 # downgrade to warning
+      expected_subdomains: [www, api, mail]
+```
+
+| Key | Description |
+|-----|-------------|
+| `skip_checks` | List of check names to skip entirely. Existing issues are closed. |
+| `severity_overrides` | Override a check's status (`pass`, `warn`, `fail`). Original status is preserved in JSON as `original_status`. |
+| `expected_subdomains` | Subdomains the TLS certificate should cover (checked via SANs). |
+
+Both formats can be mixed in the same file. The simple string format is fully backward compatible.
+
 ## Requirements
 
 - A GitHub repository (fork this one)
@@ -79,6 +107,20 @@ domains:
 
 ```bash
 uv run scripts/audit.py
+```
+
+## Project structure
+
+```
+scripts/
+├── audit.py              # CLI entrypoint and orchestration
+├── config.py             # domains.yml parser (simple + extended format)
+├── checks/
+│   ├── email.py          # SPF, DMARC, DNSSEC, MX
+│   ├── tls.py            # certificate, protocol, cipher, coverage, CT, CAA
+│   ├── web.py            # HTTPS redirect, HSTS, security headers
+│   └── dns.py            # NS health, SOA consistency, dangling CNAMEs
+└── manage_issues.py      # GitHub Issue lifecycle management
 ```
 
 ## Contributing

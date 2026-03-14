@@ -20,9 +20,29 @@
     },
     "tls_cert": {
       "status": "pass",
-      "message": "Certificate valid for 82 days (expires 2026-06-04)",
-      "days_left": 82,
+      "message": "Certificate expires 2026-06-04",
+      "expires": "2026-06-04",
       "issuer": "Google Trust Services"
+    },
+    "tls_protocol": {
+      "status": "pass",
+      "message": "Protocol: TLSv1.3"
+    },
+    "tls_cipher": {
+      "status": "pass",
+      "message": "Cipher: TLS_AES_256_GCM_SHA384 (256 bits)"
+    },
+    "cert_coverage": {
+      "status": "warn",
+      "message": "Certificate does not cover www.gantryops.dev",
+      "sans": [
+        "gantryops.dev"
+      ]
+    },
+    "ct_log": {
+      "status": "pass",
+      "message": "Found 7 CT log entry/entries for this domain",
+      "fingerprint": "c114e715faa775a9814f28b42b3baee2e0ee75d95eeecff224622afbcec59a4b"
     },
     "caa": {
       "status": "warn",

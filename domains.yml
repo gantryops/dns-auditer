@@ -2,6 +2,19 @@
 # Domain Configuration
 # ==============================================================================
 # Add your domains here. The workflow will check each one daily.
+#
+# Simple format — just list domain names:
+#   domains:
+#     - example.com
+#
+# Extended format — per-domain configuration:
+#   domains:
+#     - example.com:
+#         skip_checks: [dnssec, permissions_policy]
+#         severity_overrides:
+#           caa: pass          # accepted risk, don't alert
+#           hsts: warn         # downgrade to warning
+#         expected_subdomains: [www, api, mail]
 
 domains:
   - gantryops.dev
