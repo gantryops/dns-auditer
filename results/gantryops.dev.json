@@ -41,7 +41,7 @@
     },
     "ct_log": {
       "status": "pass",
-      "message": "Found 7 CT log entry/entries for this domain",
+      "message": "Found 11 CT log entry/entries for this domain",
       "fingerprint": "c114e715faa775a9814f28b42b3baee2e0ee75d95eeecff224622afbcec59a4b"
     },
     "caa": {
@@ -78,7 +78,7 @@
     },
     "soa_consistency": {
       "status": "pass",
-      "message": "SOA serial consistent: 2398305723"
+      "message": "SOA serial consistent: 2399058831"
     }
   }
 }
