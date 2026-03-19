@@ -40,8 +40,9 @@
       ]
     },
     "ct_log": {
-      "status": "warn",
-      "message": "Could not query Certificate Transparency logs: The read operation timed out"
+      "status": "pass",
+      "message": "Found 11 CT log entry/entries for this domain",
+      "fingerprint": "c114e715faa775a9814f28b42b3baee2e0ee75d95eeecff224622afbcec59a4b"
     },
     "caa": {
       "status": "warn",
