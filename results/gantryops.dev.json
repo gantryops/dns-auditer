@@ -41,7 +41,7 @@
     },
     "ct_log": {
       "status": "warn",
-      "message": "Could not query Certificate Transparency logs: The read operation timed out"
+      "message": "Could not query Certificate Transparency logs: HTTP Error 502: Bad Gateway"
     },
     "caa": {
       "status": "warn",
